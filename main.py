@@ -20,8 +20,8 @@ def converter_video(arquivo_entrada, arquivo_saida, formato):
     return tempo_fim - tempo_inicio
 
 def main():
-    arquivo_entrada = 'videos/2 mim - 360p - A.mov'
-    arquivo_saida = 'videos\\outputs\\'
+    arquivo_entrada = 'videos/'
+    arquivo_saida = 'videos/outputs'
 
     escolha_formato = input("Escolha o formato de saída (mp4, avi, mov): ")
 
