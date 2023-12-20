@@ -3,40 +3,41 @@ import psutil
 import time
 from moviepy.editor import VideoFileClip
 
-def convert_video(input_file, output_file, format):
-    start_time = time.time()
-    clip = VideoFileClip(input_file)
+def converter_video(arquivo_entrada, arquivo_saida, formato):
+    tempo_inicio = time.time()
+    clip = VideoFileClip(arquivo_entrada)
     
-    if format == 'mp4':
-        clip.write_videofile(output_file + '.mp4', codec='libx264')
-    elif format == 'avi':
-        clip.write_videofile(output_file + '.avi', codec='rawvideo')
-    elif format == 'mov':
-        clip.write_videofile(output_file + '.mov', codec='libx264')
+    if formato == 'mp4':
+        clip.write_videofile(arquivo_saida + '.mp4', codec='libx264')
+    elif formato == 'avi':
+        clip.write_videofile(arquivo_saida + '.avi', codec='rawvideo')
+    elif formato == 'mov':
+        clip.write_videofile(arquivo_saida + '.mov', codec='libx264')
     
     clip.close()
-    end_time = time.time()
+    tempo_fim = time.time()
 
-    return end_time - start_time
+    return tempo_fim - tempo_inicio
 
 def main():
-    input_file = 'Videos\Copias\Alta - 2 min.wmv'
-    output_file = 'Videos\\Outputs\\'
+    arquivo_entrada = 'videos/2 mim - 360p - A.mov'
+    arquivo_saida = 'videos\\outputs\\'
 
-    format_choice = input("Escolha o formato de saída (mp4, avi, mov): ")
+    escolha_formato = input("Escolha o formato de saída (mp4, avi, mov): ")
 
-    time_format = convert_video(input_file, output_file, format_choice)
+    tempo_formato = converter_video(arquivo_entrada, arquivo_saida, escolha_formato)
 
-    print(f"Tempo de conversão para {format_choice.upper()}: {time_format} segundos")
+    print(f"Tempo de conversão para {escolha_formato.upper()}: {tempo_formato} segundos")
 
     # Monitorando o uso de memória
-    process = psutil.Process()
-    memory_usage = process.memory_info().rss / (1024 * 1024)  # Em MB
-    print("Consumo de memória:", memory_usage, "MB")
+    processo = psutil.Process()
+    uso_memoria = processo.memory_info().rss / (1024 * 1024)  # Em MB
+    print("Consumo de memória:", uso_memoria, "MB")
 
     # Verificando o tamanho do arquivo resultante
-    file_size = os.path.getsize(output_file + '.' + format_choice) / (1024 * 1024 * 1024)  # Em GB
-    print(f"Tamanho do arquivo {format_choice.upper()}: {file_size} GB")
+    tamanho_arquivo = os.path.getsize(arquivo_saida + '.' + escolha_formato) / (1024 * 1024 * 1024)  # Em GB
+    print(f"Tamanho do arquivo {escolha_formato.upper()}: {tamanho_arquivo} GB")
 
 if __name__ == "__main__":
     main()
+
